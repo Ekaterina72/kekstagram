@@ -1,0 +1,2 @@
+
+import './control-galary.js';
