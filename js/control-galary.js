@@ -6,19 +6,28 @@ import { renderbigPicture } from './render-big-picture.js';
 const picContainer = document.querySelector('.pictures');
 const bigPictureModal = document.querySelector('.big-picture');
 
-
 const closePictureModal = () => {
+  bigPictureModal.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+};
+
+
+const closePictureModalHandler = () => {
   const closeButton = document.querySelector('.big-picture__cancel');
-  closeButton.addEventListener('click', () => {
-    bigPictureModal.classList.add('hidden');
+  closeButton.addEventListener('click', closePictureModal);
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePictureModal();
+    }
   });
 };
 
-const openPictureModal = (pictureLink, url, likes, comments, description) => {
+const openPictureModalHandler = (pictureLink, object) => {
   pictureLink.addEventListener('click', () => {
     bigPictureModal.classList.remove('hidden');
-    renderbigPicture(url, likes, comments, description);
-    closePictureModal();
+    renderbigPicture(object);
+    closePictureModalHandler();
+    document.body.classList.add('modal-open');
   });
 };
 
@@ -27,10 +36,6 @@ for (let i = 0; i < PhotoObjects.length; i++) {
   renderPictureObjects(PhotoObjects[i], picContainer);
 }
 
-
-
-
-
-export { openPictureModal };
+export { openPictureModalHandler };
 
 

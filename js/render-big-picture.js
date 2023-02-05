@@ -1,37 +1,23 @@
 
-// const bigPictureModal = document.querySelector('.big-picture');
-// const closePictureModalButton = document.querySelector('.big-picture__cancel');
+const renderbigPicture = (object) => {
 
-// const openPictureModal = (pictureLink, comments, description) => {
-//   pictureLink.addEventListener('click', () => {
-//     bigPictureModal.classList.remove('hidden');
-//     renderbigPicture(comments, description);
-//   });
-// };
-
-// const closePictureModal = (closeButton) => {
-//   closeButton.addEventListener('click', () => {
-//     bigPictureModal.classList.add('hidden');
-//   });
-// };
-
-// closePictureModal(closePictureModalButton);
-
-const renderbigPicture = (url, likes, comments, description) => {
-
-  // const { url, comments, likes, description } = object;
+  const { url, comments, likes, description } = object;
   const bigPictureContainer = document.querySelector('.big-picture__img');
   const bigPictire = bigPictureContainer.querySelector('img');
   const likesCount = document.querySelector('.likes-count');
   const commentsCount = document.querySelector('.comments-count');
   const commentContainer = document.querySelector('.social__comments');
   const pictureCaption = document.querySelector('.social__caption');
+  const commentCountContainer = document.querySelector('.social__comment-count ');
+  const commentsLoader = document.querySelector('.comments-loader');
   commentContainer.innerHTML = '';
 
   bigPictire.src = url;
   likesCount.textContent = likes;
   commentsCount.textContent = comments.length;
   pictureCaption.textContent = description;
+  commentCountContainer.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
 
   for (const comment of comments) {
     const { avatar, message, name } = comment;

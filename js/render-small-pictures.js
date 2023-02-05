@@ -1,8 +1,8 @@
-import { openPictureModal } from './control-galary.js';
+import { openPictureModalHandler } from './control-galary.js';
 
 const renderPictureObjects = (object, container) => {
 
-  const { url, comments, likes, description } = object;
+  const { url, comments, likes, } = object;
 
   const picture = document.querySelector('#picture').content.cloneNode(true);
   const linkElement = picture.querySelector('.picture');
@@ -20,8 +20,7 @@ const renderPictureObjects = (object, container) => {
   linkElement.append(paragraphElement);
   container.append(linkElement);
 
-  // добавляем обработчик открытия модалки
-  openPictureModal(linkElement, url, likes, comments, description);
+  openPictureModalHandler(linkElement, object);
 };
 
 export { renderPictureObjects };
