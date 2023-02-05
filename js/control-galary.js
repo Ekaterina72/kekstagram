@@ -1,14 +1,36 @@
-import { PhotoObjects } from './mocks.js';
 import { renderPictureObjects } from './render-small-pictures.js';
-import { openPictureModal, renderbigPicture } from './render-big-picture.js';
+import { PhotoObjects } from './mocks.js';
+import { renderbigPicture } from './render-big-picture.js';
 
 
 const picContainer = document.querySelector('.pictures');
-console.log(picContainer.children);
+const bigPictureModal = document.querySelector('.big-picture');
 
-for (let i = 1; i < PhotoObjects.length; i++) {
 
+const closePictureModal = () => {
+  const closeButton = document.querySelector('.big-picture__cancel');
+  closeButton.addEventListener('click', () => {
+    bigPictureModal.classList.add('hidden');
+  });
 };
 
-renderPictureObjects(PhotoObjects, picContainer);
-renderbigPicture(PhotoObjects);
+const openPictureModal = (pictureLink, url, likes, comments, description) => {
+  pictureLink.addEventListener('click', () => {
+    bigPictureModal.classList.remove('hidden');
+    renderbigPicture(url, likes, comments, description);
+    closePictureModal();
+  });
+};
+
+for (let i = 0; i < PhotoObjects.length; i++) {
+
+  renderPictureObjects(PhotoObjects[i], picContainer);
+}
+
+
+
+
+
+export { openPictureModal };
+
+
